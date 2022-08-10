@@ -1,0 +1,62 @@
+<div class="navbar">
+  <a  routerLinkActive="active" routerLink="/adminDestinations">Destinations</a>
+  <a  routerLinkActive="active" routerLink="/adminSites">Sites</a>
+  <a  routerLinkActive="active" routerLink="/adminHotels">Hotels</a>
+  <a  routerLinkActive="active" routerLink="/adminTransportations">Transportations</a>
+</div>
+  
+  <div id="main">
+    <h2>Manage Transportation</h2>
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit2()">
+      <div class="container">
+        <!-- <label for="id">ID: </label>
+        <input id="id" type="number" formControlName="id" />
+        <br />
+        <div class="error" *ngIf="myForm.get('id')?.invalid">ID is required</div><br/> -->
+        <label for="transName">Transportation name: </label>
+        <input id="transName" type="text" formControlName="transName" /> 
+        <br />
+        <div class="error" *ngIf="myForm.get('transName')?.invalid">Transportation name is required</div><br/>
+        <label for="transDes">Transportation Description: </label>
+        <input id="transDes" type="text" formControlName="transDes" />
+        <br />
+        <div class="error" *ngIf="myForm.get('transDes')?.invalid">Transportation Description is required</div><br/>
+        <label for="transRate">Transportation Ratings: </label>
+        <input id="transRate" type="number" formControlName="transRate" min="0" max="5" />
+        <br />
+        <div class="error" *ngIf="myForm.get('transRate')?.invalid">Transportation Rating is required</div><br/>
+        <label for="transPrice">Transportation Price: </label>
+        <input id="transPrice" type="number" formControlName="transPrice" min="0" />
+        <br />
+        <div class="error" *ngIf="myForm.get('transPrice')?.invalid">Transportation Price is required</div><br/>
+        <label for="transCap">Transportation Capacity: </label>
+        <input id="transCap" type="number" formControlName="transCap" min="1"/>
+        <br />
+        <div class="error" *ngIf="myForm.get('transCap')?.invalid">Transportation Capacity is required</div><br/>
+        <input type="submit" [disabled]="!myForm.valid" value="Submit"/>
+      </div>
+    </form>
+    <div class="container">
+      <table id="table">
+        <tr>
+          <!-- <th>ID</th> -->
+          <th>Name</th>
+          <th>Desription</th>
+          <th>Rating</th>
+          <th>Price</th>
+          <th>Capacity</th>
+          <th>Delete</th>
+        </tr>
+          <tr *ngFor="let t of transport">
+            <!-- <td>{{ t.id }}</td> -->
+            <td>{{ t.t_name }}</td>
+            <td>{{ t.t_description }}</td>
+            <td>{{ getTotalStars(t.t_rating) }}</td>
+            <td>${{ t.t_price }}</td>
+            <td>{{ t.t_capacity }} person/(s)</td>
+            <td><button (click)="deleteTransport(t.id)">X</button></td>
+          </tr>
+      </table>
+      <hr />
+      </div>
+</div>

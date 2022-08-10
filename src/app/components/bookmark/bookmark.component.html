@@ -1,0 +1,28 @@
+<div class="container">
+    <h1 style="text-align: center;">Bookmarks Page for User: {{currentUser[0].login_username}}</h1>
+</div>
+<hr>
+<div *ngFor="let data of getData"><div class="container">
+    <div class="row">
+        <div>
+            <div class="cardShadowPadding">
+                <div class="card" style="height: 55rem;">
+                    <img class="card-img-top" style="height:30rem; width: 100%;" src="/assets/bookmarklogo.jpg" alt="Card image cap">
+                    <div >
+                        <div class="card-body">
+                            <h2 class="card-title">Bookmark Details</h2>
+                            <h3 class="card-text"><b>Destination Name:- {{data.DES_NAME}}</b> </h3>
+                            <h3 class="card-text"><b>Ratings:- {{data.des_rating}}</b> </h3>
+
+                        </div>
+                        <br>
+                        <div class="card-body">
+                            <button type="button" class="btn btn-danger" (click)="onDelete(data.dest_id)">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

@@ -1,0 +1,50 @@
+<div class="navbar">
+  <a  routerLinkActive="active" routerLink="/adminDestinations">Destinations</a>
+  <a  routerLinkActive="active" routerLink="/adminSites">Sites</a>
+  <a  routerLinkActive="active" routerLink="/adminHotels">Hotels</a>
+  <a  routerLinkActive="active" routerLink="/adminTransportations">Transportations</a>
+</div>
+  
+  <div id="main">
+    <h2>Manage Destinations</h2>
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit2()">
+      <div class="container">
+        <!-- <label for="id">ID: </label>
+        <input id="id" type="number" formControlName="id" />
+        <br />
+        <div class="error" *ngIf="myForm.get('id')?.invalid">ID is required</div><br/> -->
+        <label for="desName">Destination name: </label>
+        <input id="desName" type="text" formControlName="desName" /> 
+        <br />
+        <div class="error" *ngIf="myForm.get('desName')?.invalid">Destination name is required</div><br/>
+        <label for="desDist">Destination Distance: </label>
+        <input id="desDist" type="number" formControlName="desDist" min="0" />
+        <br />
+        <div class="error" *ngIf="myForm.get('desDist')?.invalid">Destination Distance is required</div><br/>
+        <label for="desRate">Destination Ratings: </label>
+        <input id="desRate" type="number" formControlName="desRate" min="0" max="5"/>
+        <br />
+        <div class="error" *ngIf="myForm.get('desRate')?.invalid">Destination Ratings is required</div><br/>
+        <input type="submit" [disabled]="!myForm.valid" value="Submit"/>
+      </div>
+    </form>
+    <div class="container">
+      <table id="table">
+        <tr>
+          <!-- <th>ID</th> -->
+          <th>Name</th>
+          <th>Distance</th>
+          <th>Rating</th>
+          <th>Delete</th>
+        </tr>
+          <tr *ngFor="let d of destination">
+            <!-- <td>{{ d.id }}</td> -->
+            <td>{{ d.des_name }}</td>
+            <td>{{ d.des_distance }} KMs</td>
+            <td>{{ getTotalStars(d.des_rating) }}</td>
+            <td><button (click)="deleteDestination(d.id)">X</button></td>
+          </tr>
+      </table>
+      <hr />
+      </div>
+</div>

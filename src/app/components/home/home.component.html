@@ -1,0 +1,39 @@
+<header class="site-header">
+    <div class="jumbotron text-center">
+        <h1>
+            <h1>{{slogan}}</h1>
+            <p>{{getSubTitle()}}</p>
+        </h1>
+        <form (ngSubmit)="goToListings()" method="post" [formGroup]="homeForm">
+            <select class="form-control" style="width: 20%; margin-left:40%" id="desId" name="desId" formControlName="desId">
+                <option value="0">All Destinations</option>
+                <option *ngFor="let d of destination" value={{d.id}}> {{d.des_name}}</option>
+            </select>
+            <input style="width: 20%;" type="submit" value="Search" class="btn btn-danger" >
+        </form>
+        
+    </div>
+    <div class="container">
+      <div class="row">
+        <app-gallery></app-gallery>
+    </div>
+    </div>
+    
+
+    <!-- <div class="cardShadowPadding contentPadding container">
+        <h2>Reviews</h2>
+        <h6>Hover mouse to make it stay</h6>
+        <c-carousel [interval]="1000">
+            <c-carousel-inner>
+              <c-carousel-item *ngFor="let site of destination;" style="height: 100px;">
+                <c-carousel-caption style="color:black; text-decoration: none;">
+                  <h3>{{site.des_name}}</h3>
+                  <p>{{site.des_}}</p>
+                </c-carousel-caption>
+              </c-carousel-item>
+            </c-carousel-inner>
+            
+          </c-carousel>
+    </div> -->
+
+</header>

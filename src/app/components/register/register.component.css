@@ -1,0 +1,14 @@
+.cardShadowPadding {
+    margin-top: 20px;
+    box-shadow: 2px 2px 8px #999999;
+    margin-bottom: 20px;
+}
+.cardShadowPadding:hover {
+    transition: 0.3s;
+    box-shadow: 3px 3px 20px #999999;
+    background-color: #f7f7f7;
+}
+
+.contentPadding {
+    padding: 20px;
+}

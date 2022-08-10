@@ -1,0 +1,172 @@
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+
+<style>
+    .cardShadowPadding {
+        margin-top: 20px;
+        box-shadow: 2px 2px 8px #999999;
+        margin-bottom: 20px;
+    }
+    .cardShadowPadding:hover {
+        transition: 0.3s;
+        box-shadow: 3px 3px 20px #999999;
+        background-color: #f7f7f7;
+    }
+
+    .contentPadding {
+        padding: 20px;
+    }
+
+    .centerCropped {
+        width: 300px;
+        height: 600px;
+        background-Position: center center;
+        background-Repeat: no-repeat
+    }
+
+
+    .positionRight {
+        margin-top: 20px;
+        box-shadow: 5px 5px 10px #888888;
+        margin-bottom: 20px;
+        padding: 20px;
+    }
+
+    .positionRight:hover {
+        transition: 0.3s;
+        box-shadow: 3px 3px 20px #999999;
+        background-color: #f7f7f7;
+    }
+    .crop {
+        width: 100%;
+        height: 400px;
+        object-fit: cover;
+    }
+</style>
+<div>
+    <div class="container">
+        <div class="row">
+            <!-- THIS IS THE SECTION  ON LEFT 66% Width -->
+            <div class="col-sm-8">
+                <div class="row">
+                    <div class="cardShadowPadding contentPadding">
+                        <h2>{{getAllSitesName()}} in</h2>
+                        <h1 style="width: 80%;">TORONTO</h1>
+                        <hr>
+                        <h4>Overall rating <span>{{getTotalStars()}}</span></h4>
+                        <p>Toronto, the capital of the province of Ontario, is a major Canadian city along Lake Ontario’s northwestern shore. It's a dynamic metropolis with a core of soaring skyscrapers, all dwarfed by the iconic, free-standing CN Tower. Toronto also has many green spaces, from the orderly oval of Queen’s Park to 400-acre High Park and its trails, sports facilities and zoo.</p>
+
+
+                    </div>
+                    <div class="cardShadowPadding">
+                        <c-carousel [animate]="false">
+                            <c-carousel-indicators></c-carousel-indicators>
+                            <c-carousel-inner>
+                                <c-carousel-item *ngFor="let site of trips;">
+                                    <img [src]="getImgUrl(site.img_url)" class="crop" />
+                                </c-carousel-item>
+                            </c-carousel-inner>
+                            <!-- <c-carousel-caption class="d-none d-md-block">
+                                <h3>asdas</h3>
+                                <p>asdsa</p>
+                            </c-carousel-caption> -->
+                            <c-carousel-control [routerLink] class="left carousel-control" direction="prev">
+                                <span class="glyphicon glyphicon-chevron-left"></span>
+                            </c-carousel-control>
+                            <c-carousel-control [routerLink] class="right carousel-control" direction="next">
+                                <span class="glyphicon glyphicon-chevron-right"></span>
+                            </c-carousel-control>
+                        </c-carousel>
+                    </div>
+                    
+                    <div class="cardShadowPadding contentPadding" *ngFor="let site of trips;">
+                        <h2>{{site.site_name}}</h2>
+                        <p>{{site.site_description}}</p>
+                        <h4>Pay ${{site.site_price}} for a {{getTotalStarsByItem(site.site_rating)}} star rated site</h4>
+                    </div>
+
+                    <div class="cardShadowPadding contentPadding">
+                        <h2>Reviews</h2>
+                        <h6>Hover mouse to make it stay</h6>
+                        <c-carousel [interval]="1000">
+                            <c-carousel-inner>
+                              <c-carousel-item *ngFor="let site of trips;" style="height: 100px;">
+                                <c-carousel-caption style="color:black; text-decoration: none;">
+                                  <h3>{{site.site_name}}</h3>
+                                  <p>{{site.site_description}}</p>
+                                </c-carousel-caption>
+                              </c-carousel-item>
+                            </c-carousel-inner>
+                            
+                          </c-carousel>
+                    </div>
+
+                </div>
+            </div>
+            <!-- THIS IS THE SECTION  ON RIGHT 33% Width -->
+            <div class="col-sm-4">
+                <div class="positionRight">
+                    <div className='container'>
+                        <h2>{{trips[0].hotel_name}}</h2>
+                        <p style="font-style: italic;">{{trips[0].hotel_name}}</p>
+                        <h4>Hotel rating <span>{{getTotalStarsByItem(trips[0].hotel_rating)}}</span> Stars</h4>
+                        <h4>Hotel price <span>${{trips[0].hotel_price}}</span> per night</h4>
+                    </div>
+                </div>
+
+                <div class="positionRight">
+                    <div className='container'>
+                        <span><h4>{{trips[0].t_name}} Car will take you around </h4></span>
+                        <h4><span>{{getTotalStarsByItem(trips[0].t_rating)}} for {{trips[0].t_capacity}} people</span></h4>
+                        <p style="font-style: italic;">{{trips[0].t_description}}</p>
+                        
+                        <!-- <h4>Booking price <span>${{trips[0].t_price}}</span> per night</h4> -->
+                    </div>
+                </div>
+
+                <!-- <div class="positionRight">
+                    <h2>Per Night</h2>
+
+                    <h4>Price per night <span>${{trips[0].hotel_price}}</span></h4>
+                </div> -->
+                <div class="positionRight">
+                    <form (ngSubmit)="calculatePriceByDates()" [formGroup]="tripForm" method="post">
+                        <div class="form-group">
+                            <label>Start Date</label>
+                            <input formControlName="startDate" type="date" id="startDate" class="form-control" min={{startMinDate}} (change)="startDateChanged()">
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                            <label>End Date</label>
+                            <input formControlName="endDate" type="date" id="endDate" class="form-control" min={{endMinDate}}>
+                        </div>
+                        <hr>
+                        <input type="submit" value="Calculate Package" class="btn btn-danger">
+                    </form>
+                </div>
+
+
+                <div class="positionRight">
+                    <h2>Final Price</h2>
+                    <div *ngFor="let site of trips;">${{site.site_price}} for {{site.site_name}} {{getTotalStarsByItem(site.site_rating)}}</div>
+                    <hr>
+                    <h4>Price per night $<span>{{trips[0].hotel_price}}</span></h4>
+                    <h4></h4>
+                    <p>{{booking.start_date}} to {{booking.start_date}}</p>
+                    <hr>
+                    <h3>Total Price <span>${{booking.price}}</span></h3>
+                    <p>For {{booking.numOfDays}} Night, {{booking.numOfDays - 1}} Days</p>
+                    <form>
+                        <button type="button" class="btn btn-warning" style="width: 100%;">Shortlist</button>
+                        <button type="button" (click)="bookTripForUser()" class="btn btn-primary" style="width: 100%; margin-top: 10px;">{{submitBtnTxt}}</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

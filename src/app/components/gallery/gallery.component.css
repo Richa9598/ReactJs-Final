@@ -1,0 +1,38 @@
+.img-container {
+    width: auto;
+    height: auto;
+}
+
+.crop{
+    width: 100%;
+    height: 700px;
+    object-fit: cover;
+}
+
+.cropMini{
+    width: 100%;
+    height: 60px;
+    object-fit: cover;
+}
+
+.img-container img {
+    width: 100%;
+    height: 100%;
+}
+
+.img-prev{
+    margin-top: 10px;
+}
+
+.img-slide{
+    display: inline-block;
+    width: 9%;
+    margin: 2px 5px;
+    cursor: pointer;
+    opacity: 0.6;
+}
+
+.active {
+    border: 2px solid black;
+    opacity: 1;
+}

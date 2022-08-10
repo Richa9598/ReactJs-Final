@@ -1,0 +1,27 @@
+<style>
+    .crop {
+        width: 100%;
+        height: 400px;
+        object-fit: cover;
+    }
+</style>
+
+<c-carousel [interval]="1000">
+    <c-carousel-indicators></c-carousel-indicators>
+    <c-carousel-inner>
+        <c-carousel-item *ngFor="let slide of slides">
+            <img [src]="slide" class="crop" />
+        </c-carousel-item>
+    </c-carousel-inner>
+    <!-- <c-carousel-caption class="d-none d-md-block">
+        <h3>asdas</h3>
+        <p>asdsa</p>
+    </c-carousel-caption> -->
+    <c-carousel-control [routerLink] class="left carousel-control" direction="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+    </c-carousel-control>
+    <c-carousel-control [routerLink] class="right carousel-control" direction="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+        <span class="sr-only">Next</span>
+    </c-carousel-control>
+</c-carousel>

@@ -1,0 +1,56 @@
+<div id="main">
+    <h2>Contact Us Form !</h2>
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit2()">
+      <div class="container">
+
+        <label for="id">Enter Id: </label>
+        <input id="id" type="number" formControlName="id" /> 
+        <br />
+        <div class="error" *ngIf="myForm.get('id')?.invalid">Your number is required</div><br/>
+        
+        <label for="conName">Enter name: </label>
+        <input id="conName" type="text" formControlName="conName" /> 
+        <br />
+        <div class="error" *ngIf="myForm.get('conName')?.invalid">Your name is required</div><br/>
+        
+        
+        <label for="conCountry">Country: </label>
+        <input id="conCountry" type="text" formControlName="conCountry" />
+        <br />
+        <div class="error" *ngIf="myForm.get('conCountry')?.invalid">Country is required</div><br/>
+        
+        
+        <label for="conEmail">Email</label>
+        <input id="conEmail" type="text" formControlName="conEmail" />
+        <br />
+        <div class="error" *ngIf="myForm.get('conEmail')?.invalid">Email is required</div><br/>
+
+        <label for="conFeedback">Feedback</label>
+        <input id="conFeedback" type="text" formControlName="conFeedback" />
+        <br />
+        <div class="error" *ngIf="myForm.get('conFeedback')?.invalid">Feedback is required</div><br/>
+
+        <input type="submit" value="Submit"/>
+      </div>
+    </form>
+    <!-- <div class="container">
+      <table id="table">
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Country</th>
+          <th>Email</th>
+          <th>Feedback</th>
+        </tr>
+          <tr *ngFor="let d of contact">
+            <td>{{ d.id }}</td>
+            <td>{{ d.contact_name }}</td>
+            <td>{{ d.contact_country }}</td>
+            <td>{{ d.contact_email }}</td>
+            <td>{{d.contact_feedback}}</td>
+            <td><button (click)="deleteContact(d.id)">X</button></td>
+          </tr>
+      </table>
+      <hr />
+      </div>
+</div> -->

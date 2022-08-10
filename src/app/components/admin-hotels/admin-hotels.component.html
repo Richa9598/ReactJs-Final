@@ -1,0 +1,61 @@
+<div class="navbar">
+  <a  routerLinkActive="active" routerLink="/adminDestinations">Destinations</a>
+  <a  routerLinkActive="active" routerLink="/adminSites">Sites</a>
+  <a  routerLinkActive="active" routerLink="/adminHotels">Hotels</a>
+  <a  routerLinkActive="active" routerLink="/adminTransportations">Transportations</a>
+</div>
+  
+  <div id="main">
+    <h2>Manage Hotels</h2>
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit2()">
+      <div class="container">
+        <!-- <label for="id">ID: </label>
+        <input id="id" type="number" formControlName="id" />
+        <br />
+        <div class="error" *ngIf="myForm.get('id')?.invalid">ID is required</div><br/> -->
+        <label for="hotelName">Hotel name: </label>
+        <input id="hotelName" type="text" formControlName="hotelName" /> 
+        <br />
+        <div class="error" *ngIf="myForm.get('hotelName')?.invalid">Hotel name is required</div><br/>
+        <label for="hotelRate">Hotel Ratings: </label>
+        <input id="hotelRate" type="number" formControlName="hotelRate" min="0" max="5" />
+        <br />
+        <div class="error" *ngIf="myForm.get('hotelRate')?.invalid">Hotel Rating is required</div><br/>
+        <label for="hotelPrice">Hotel Price: </label>
+        <input id="hotelPrice" type="number" formControlName="hotelPrice" min="0" />
+        <br />
+        <div class="error" *ngIf="myForm.get('hotelPrice')?.invalid">Hotel Price is required</div><br/>
+        <label for="desID">Destination ID: </label>
+        <select class="form-control" id="desId" name="desId" formControlName="desId">
+          <option value="0">All Destinations</option>
+          <option *ngFor="let d of destination" value={{d.id}}> {{d.des_name}}</option>
+      </select>
+      <div class="error" *ngIf="myForm.get('desId')?.invalid">Destination ID is required</div><br/>
+        <!-- <input id="desID" type="number" formControlName="desID" /> -->
+        <br />
+        <div class="error" *ngIf="myForm.get('desID')?.invalid">Destination ID is required</div><br/>
+        <input type="submit" [disabled]="!myForm.valid" value="Submit"/>
+      </div>
+    </form>
+    <div class="container">
+      <table id="table">
+        <tr>
+          <!-- <th>ID</th> -->
+          <th>Name</th>
+          <th>Rating</th>
+          <th>Price</th>
+          <th>Destination</th>
+          <th>Delete</th>
+        </tr>
+          <tr *ngFor="let h of hotel">
+            <!-- <td>{{ h.id }}</td> -->
+            <td>{{ h.hotel_name }}</td>
+            <td>{{ getTotalStars(h.hotel_rating) }}</td>
+            <td>${{ h.hotel_price }}</td>
+            <td>{{ h.des_name }}</td>
+            <td><button (click)="deleteHotel(h.id)">X</button></td>
+          </tr>
+      </table>
+      <hr />
+      </div>
+</div>

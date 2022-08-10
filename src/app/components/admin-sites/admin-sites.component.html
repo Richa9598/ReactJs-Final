@@ -1,0 +1,67 @@
+<div class="navbar">
+  <a  routerLinkActive="active" routerLink="/adminDestinations">Destinations</a>
+  <a  routerLinkActive="active" routerLink="/adminSites">Sites</a>
+  <a  routerLinkActive="active" routerLink="/adminHotels">Hotels</a>
+  <a  routerLinkActive="active" routerLink="/adminTransportations">Transportations</a>
+</div>
+  
+  <div id="main">
+    <h2>Manage Sites</h2>
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit2()">
+      <div class="container">
+        <!-- <label for="id">ID: </label>
+        <input id="id" type="number" formControlName="id" />
+        <br />
+        <div class="error" *ngIf="myForm.get('id')?.invalid">ID is required</div><br/> -->
+        <label for="siteName">Site name: </label>
+        <input id="siteName" type="text" formControlName="siteName" /> 
+        <br />
+        <div class="error" *ngIf="myForm.get('siteName')?.invalid">Site name is required</div><br/>
+        <label for="siteDes">Site Description: </label>
+        <input id="siteDes" type="text" formControlName="siteDes" />
+        <br />
+        <div class="error" *ngIf="myForm.get('siteDes')?.invalid">Site Description is required</div><br/>
+        <label for="siteRate">Site Ratings: </label>
+        <input id="siteRate" type="number" formControlName="siteRate" min="0" max="5"/>
+        <br />
+        <div class="error" *ngIf="myForm.get('siteRate')?.invalid">Site Rating is required</div><br/>
+        <label for="sitePrice">Site Price: </label>
+        <input id="sitePrice" type="number" formControlName="sitePrice" min="0" />
+        <br />
+        <div class="error" *ngIf="myForm.get('sitePrice')?.invalid">Site Price is required</div><br/>
+        <label for="desID">Destination ID: </label>
+        <select class="form-control" id="desId" name="desId" formControlName="desId">
+          <option value="0">All Destinations</option>
+          <option *ngFor="let d of destination" value={{d.id}}> {{d.des_name}}</option>
+      </select>
+      <div class="error" *ngIf="myForm.get('desId')?.invalid">Destination ID is required</div><br/>
+        <!-- <input id="desID" type="number" formControlName="desID" /> -->
+        <br />
+        <div class="error" *ngIf="myForm.get('desID')?.invalid">Destination ID is required</div><br/>
+        <input type="submit" [disabled]="!myForm.valid" value="Submit"/>
+      </div>
+    </form>
+    <div class="container">
+      <table id="table">
+        <tr>
+          <!-- <th>ID</th> -->
+          <th>Name</th>
+          <th>Description</th>
+          <th>Rating</th>
+          <th>Price</th>
+          <th>Desination</th> 
+          <th>Delete</th>         
+        </tr>
+          <tr *ngFor="let s of site">
+            <!-- <td>{{ s.id }}</td> -->
+            <td>{{ s.site_name }}</td>
+            <td>{{ s.site_description.substring(0,90) }}...</td>
+            <td>{{ getTotalStars(s.site_rating) }}</td>
+            <td>${{ s.site_price }}</td>
+            <td>{{ s.des_name }}</td>
+            <td><button (click)="deleteSite(s.id)">X</button></td>
+          </tr>
+      </table>
+      <hr />
+      </div>
+</div>

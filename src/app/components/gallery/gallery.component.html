@@ -1,0 +1,12 @@
+<section class="gallery" style="margin-left: 200px; margin-right:200px">
+    <div class="" style="margin-bottom:150px;">
+        <div class="img-container crop" >
+            <img src={{getImgUrl(gallery[0].img_url)}} alt="Image" id="preview"> 
+            <div class="img-prev text-center">
+                <div class="img-slide cropMini" *ngFor="let i of gallery">
+                    <img src={{getImgUrl(i.img_url)}} alt="img" appGallery>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

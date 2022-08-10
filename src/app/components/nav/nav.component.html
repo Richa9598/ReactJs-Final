@@ -1,0 +1,24 @@
+<nav>
+    <div class="navbar">
+      <ul>
+      <li><a routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" routerLink="/">Travel Explorer</a></li>
+      <li><a routerLinkActive="active" routerLink="/gallery">Gallery</a></li>
+      <li><a routerLinkActive="active" routerLink="/testimonials">Testimonials</a></li>
+      <li><a routerLinkActive="active" routerLink="/contact">Contact us</a></li>
+      <li><a routerLinkActive="active" routerLink="/admin">Admin</a></li>
+      <!-- <li *ngIf="isLoggedIn"><a routerLinkActive="active" routerLink="/admin">Admin</a></li> -->
+      <div class="dropdown" style="float: left;">
+        <button  class="dropbtn">User
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <li><a routerLinkActive="active" routerLink="/login">Login</a></li>
+          <li *ngIf="isLoggedIn"><a routerLinkActive="active" routerLink="/profile">Profile</a></li>
+          <li  *ngIf="isLoggedIn"><a routerLinkActive="active" routerLink="/favorites">Favorites</a></li>
+          <li  *ngIf="isLoggedIn"><a routerLinkActive="active" routerLink="/bookmarks">Bookmarks</a></li>
+          <li  *ngIf="isLoggedIn"><a routerLinkActive="active" routerLink="/logout" (click)= "logout()">Logout</a></li>
+        </div>
+      </div>
+  </ul>
+  </div>
+</nav>

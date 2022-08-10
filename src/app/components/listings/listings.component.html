@@ -1,0 +1,110 @@
+<style>
+    .cardShadowPadding {
+        margin-top: 20px;
+        box-shadow: 5px 5px 10px #888888;
+        margin-bottom: 20px;
+    }
+
+    .cardShadowPadding:hover {
+        transition: 0.3s;
+        box-shadow: 7px 7px 20px #969696;
+        background-color: #f7f7f7;
+    }
+
+    .contentPadding {
+        padding: 20px;
+    }
+
+    .centerCropped {
+        width: 300px;
+        height: 600px;
+        background-Position: center center;
+        background-Repeat: no-repeat
+    }
+
+    ;
+</style>
+<div class="container-fluid">
+    <div class="container cardShadowPadding">
+        
+        <form [formGroup]="filterForm" (ngSubmit)="onFilter($event)">
+            <h3>Search Filter</h3>
+            <div class="row">
+                <div class="col-sm-3"> Search With Keyword
+                    <input class="form-control" placeholder="Site Name" type="text" (keydown)="searchTrips($event)"/>
+                </div>
+                <div class="col-sm-3">
+                    Rating : .
+                    <select class="form-control" id="dest" name="dest" formControlName="starRating">
+                        <option value="0">All Rating</option>
+                        <option value="1"><div style="color: rgb(228, 228, 0);font-size:200%;">&bigstar;</div> 1 Star</option>
+                        <option value="2"><div style="color: rgb(228, 228, 0);font-size:200%;">&bigstar;&bigstar;</div> 2 Star</option>
+                        <option value="3"><div style="color: rgb(228, 228, 0);font-size:200%;">&bigstar;&bigstar;&bigstar;</div> 3 Star</option>
+                        <option value="4"><div style="color: rgb(228, 228, 0);font-size:200%;">&bigstar;&bigstar;&bigstar;&bigstar;</div> 4 Star</option>
+                        <option value="5"><div style="color: rgb(228, 228, 0);font-size:200%;">&bigstar;&bigstar;&bigstar;&bigstar;&bigstar;</div> 5 Star</option>
+                    </select>
+                </div>
+                <div class="col-sm-3"> Hotel Prices : .
+                    <select class="form-control" id="dest" name="dest" formControlName="priceRange">
+                        <option value="0">All Prices</option>
+                        <option value="1">$50 - $100</option>
+                        <option value="2">$101 - $200</option>
+                        <option value="3">$201 - $350</option>
+                        <option value="4">$351 - $500</option>
+                        <option value="5">$500+</option>
+                    </select>
+                </div>
+                <div class="col-sm-3" >
+                    Maximum Distance {{getDistanceFilterValue()}} KMs
+                    <input formControlName="distance" type="range" class="slider" min="0" max="5000">
+                </div>
+            </div>
+            <div class="row" style="padding: 10px;">
+                <hr />
+                <p>Showing result <span>{{getNumberOfListings()}}</span></p>
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4">
+                    <Button type="submit" name="filter" class="btn btn-success" style="width: 100px; margin:10px">Filter</Button>
+                    <Button type="submit" name="reset" class="btn btn-danger" style="width: 100px; margin:10px">Reset</Button>
+                </div>
+                <div class="col-sm-4"></div>
+            </div>
+        </form>
+    </div>
+    <br />
+    <!-- LISTINGS -->
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4" *ngFor="let key of tripMap.entries()">
+                <div class="cardShadowPadding">
+                    <div class="card" style="height: 60rem;">
+                        <img class="card-img-top" src={{getImgUrl(key[1].img_url)}} alt="Card image cap">
+                        <div class="contentPadding">
+                            <div class="card-body">
+                                <h3 class="card-title">{{key[1].site_name}}</h3>
+                                <p>{{tripSiteCountMap.get(key[0])}} more site(s)</p>
+                                <p class="card-text">{{getSubString(key[1].site_description, 90)}} ...</p>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">${{getTotalPriceHotel(key[0])}} per night in
+                                    {{getTotalStars(key[1].des_rating, key[1].hotel_rating, key[1].t_rating,
+                                    key[1].site_rating)}} <span style="color: rgb(228, 228, 0);font-size:200%;"></span>hotel</li>
+                                <li class="list-group-item">${{getTotalPriceSites(key[0])}} for all sites</li>
+                                <li class="list-group-item">{{key[1].des_distance}} KMs</li>
+                            </ul>
+                            <div class="card-body">
+                                <p><a (click)="goToDetailsPage(key[0])" class="card-link" style="float: right;">Get More
+                                        Details</a></p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
